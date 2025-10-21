@@ -7,12 +7,14 @@
 </head>
 <body>
 
-    <a href="/convenios">Gestión de clientes</a><br>
+    <a href="/servicios">Gestión de servicios prestados</a><br>
     <a href="/tarifas">Gestión de mascotas</a><br>
     <a href="/servicios">Gestión de servicios prestados</a><br>
 
     {% if rol == "admin" %}
         <a href="/usuarios">Gestión de usuarios</a><br>
+        <a href="/tarifas">Gestión de tarifas</a><br>
+        <a href="/convenios">Gestión de convenios</a><br>
     {% endif %}
 
     <br>

@@ -10,9 +10,13 @@ def login():
     if len(resultado)==0: #<--- si el tamaño de la respuesta es 0 == usuario no existente 
         return render_template("index.html",msg="Credenciales incorrectas")
     else:
-        usuario = resultado[0]
-        session["login"] = True
-        session["nombre"] = usuario["nombre"]
-        session["rol"] = usuario["tipo"]
-        session["activo"] = usuario["activo"]
-        return redirect ("/opciones")
+        usuario = resultado[0] 
+        if usuario["activo"] != "inactivo": #<-- se valida si el usuario esta activo
+            session["login"] = True
+            session["nombre"] = usuario["nombre"]
+            session["rol"] = usuario["tipo"]
+            session["activo"] = usuario["activo"]
+            return redirect ("/opciones")
+        else:
+            return render_template("index.html",msg="El usuario no esta activo") #<-- si el usuario no esta activo se devuelve un mesensaje informando
+        
