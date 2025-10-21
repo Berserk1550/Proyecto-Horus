@@ -14,5 +14,7 @@ conexion = mysql.connector.connect(
     database="horus"
 )
 
+programa.secret_key = "una_clave_super_secreta_y_unica_123"
+
 # Cursor con resultados en formato diccionario
 mi_cursor = conexion.cursor(dictionary=True)

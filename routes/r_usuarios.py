@@ -5,12 +5,14 @@ from models.m_usuarios import mi_usuario
 @programa.route("/login", methods = ['POST'])
 def login():
     id = request.form['idusuario']
-    contra = request.form['contrausuario']
+    contra = request.form['contra']
     resultado = mi_usuario.loguear(id,contra)
     if len(resultado)==0: #<--- si el tamaño de la respuesta es 0 == usuario no existente 
-        return render_template("inicio_sesion.html",msg="Credenciales incorrectas")
+        return render_template("index.html",msg="Credenciales incorrectas")
     else:
-        session["login"] = True #<--- si resultado != 0 usuario es existente y se asignan variables de sesion 
-        session["nombre"] = resultado[0][1]
-        session["rol"]=resultado[0][3]
-        return redirect("/opciones")
+        usuario = resultado[0]
+        session["login"] = True
+        session["nombre"] = usuario["nombre"]
+        session["rol"] = usuario["tipo"]
+        session["activo"] = usuario["activo"]
+        return redirect ("/opciones")

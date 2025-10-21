@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opciones principales</title>
+</head>
+<body>
+
+    <a href="/convenios">Gestión de clientes</a><br>
+    <a href="/tarifas">Gestión de mascotas</a><br>
+    <a href="/servicios">Gestión de servicios prestados</a><br>
+
+    {% if rol == "admin" %}
+        <a href="/usuarios">Gestión de usuarios</a><br>
+    {% endif %}
+
+    <br>
+    <h2>Bienvenido(a) {{nom}}</h2>
+</body>
+</html>
