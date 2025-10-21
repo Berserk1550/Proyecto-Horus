@@ -1,4 +1,9 @@
 import mysql.connector
+from flask import Flask, redirect, render_template, request, send_from_directory, session
+import hashlib
+
+# Nombre del programa
+programa = Flask(__name__)
 
 # Conexión directa a la base de datos 'horus'
 conexion = mysql.connector.connect(
@@ -10,4 +15,4 @@ conexion = mysql.connector.connect(
 )
 
 # Cursor con resultados en formato diccionario
-cursor = conexion.cursor(dictionary=True)
+mi_cursor = conexion.cursor(dictionary=True)
