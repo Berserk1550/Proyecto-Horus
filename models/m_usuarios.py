@@ -12,6 +12,13 @@ class Usuario:
         print(resultado)
         return resultado
     
+    def ingresar_usuario(cedula,nombres, primer_apellido, segundo_apellido, correo, telefono, tel_emergencia, contrasena, rol):
+
+        sentencia="INSERT INTO usuarios (cedula,nombres, primer_apellido, segundo_apellido, correo, telefono, tel_emergencia, contrasena, rol) VALUES (%S,%S,%S,%S,%S,%S,%S,%S,%S)"
+        mi_cursor.execute(sentencia,(cedula,nombres, primer_apellido, segundo_apellido, correo, telefono, tel_emergencia, contrasena, rol))
+        mi_cursor.commit()
+        mi_cursor.close()
+        conexion.close()
     
     
     

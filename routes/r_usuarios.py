@@ -19,4 +19,20 @@ def login():
             return redirect ("/opciones")
         else:
             return render_template("index.html",msg="El usuario no esta activo") #<-- si el usuario no esta activo se devuelve un mesensaje informando
-        
+
+@programa.route('/admin/agregar_usuario', methods=['GET', 'POST'])
+def crear_usuario():
+    if 'usuario' not in session or session.get('rol') !='admin':
+        return redirect(url_for('r_login'))
+    
+    mensaje=None
+    if request.method=='POST':
+        cedula=request.form['cedula']
+        nombres=request.form['nombres']
+        primer_apellido=request.form['primer_apellido']
+        segundo_apellido=request.form['segundo_apellido']
+        correo=request.form['correo']
+        telefono=request.form['telefono']
+        tel_emergencia=request.form['tel_emergencia']
+        contraseña=request.form['contraseña']
+        rol=request.form['rol']
