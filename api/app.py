@@ -1,9 +1,9 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, session
 from flask_restful import Resource, Api
 from conexion import conexion, cursor  # Importación directa desde tu nuevo conexion.py
 
-app = Flask(__name__)
-api = Api(app)
+programa = Flask(__name__)
+api = Api(programa)
 
 # Ejemplo de recurso: lista de usuarios
 class UsuarioLista(Resource):
@@ -43,4 +43,4 @@ api.add_resource(Usuario, "/usuarios/<int:id>")
 
 # Ejecución del servidor
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True, port=8001)
+    programa.run(host="0.0.0.0", debug=True, port=8001)

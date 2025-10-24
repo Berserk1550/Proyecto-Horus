@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opciones principales</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opciones principales</title>
 </head>
 <body>
 
-    <a href="/servicios">Gestión de servicios prestados</a><br>
-    <a href="/tarifas">Gestión de mascotas</a><br>
-    <a href="/servicios">Gestión de servicios prestados</a><br>
+  <a href="/servicios">Gestión de servicios prestados</a><br>
+  <a href="/tarifas">Gestión de mascotas</a><br>
+  <a href="/servicios">Gestión de servicios prestados</a><br>
 
-    {% if rol == "admin" %}
-        <a href="/usuarios">Gestión de usuarios</a><br>
-        <a href="/tarifas">Gestión de tarifas</a><br>
-        <a href="/convenios">Gestión de convenios</a><br>
-    {% endif %}
-
+  {% if rol == "admin" %}
+    <label for="gestion_usuarios">Gestión de usuarios:</label>
+    <select id="gestion_usuarios" onchange="redirigirUsuario(this.value)">
+      <option value="">Seleccionar opción</option>
+      <option value="/usuarios/crear">Crear Usuario</option>
+      <option value="/usuarios/activar">Activar Usuario</option>
+      <option value="/usuarios/desactivar">Desactivar Usuario</option>
+      <option value="/usuarios/editar">Editar Usuario</option>
+      <option value="/usuarios/eliminar">Eliminar Usuario</option>
+    </select>
     <br>
-    <h2>Bienvenido(a) {{nom}}</h2>
+
+    <a href="/tarifas">Gestión de tarifas</a><br>
+    <a href="/convenios">Gestión de convenios</a><br>
+  {% endif %}
+
+  <br>
+  <h2>Bienvenido(a) {{ nom }}</h2>
+
+  <script>
+    function redirigirUsuario(ruta) {
+      if (ruta) {
+        window.location.href = ruta;
+      }
+    }
+  </script>
+
 </body>
 </html>
