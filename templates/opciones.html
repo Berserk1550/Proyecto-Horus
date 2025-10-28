@@ -8,11 +8,9 @@
 <body>
 
   <a href="/servicios">Gestión de servicios prestados</a><br>
-  <a href="/tarifas">Gestión de mascotas</a><br>
-  <a href="/servicios">Gestión de servicios prestados</a><br>
 
   {% if rol == "admin" %}
-    <label for="gestion_usuarios">Gestión de usuarios:</label>
+    <label for="gestion_usuarios">Gestión de parqueadero</label>
     <select id="gestion_usuarios" onchange="redirigirUsuario(this.value)">
       <option value="">Seleccionar opción</option>
       <option value="/admin/agregar_usuario">Crear Usuario</option>
@@ -23,6 +21,7 @@
     </select>
     <br>
 
+    <a href="/parqueadero">Gestion de parqueadero</a>
     <a href="/tarifas">Gestión de tarifas</a><br>
     <a href="/convenios">Gestión de convenios</a><br>
   {% endif %}

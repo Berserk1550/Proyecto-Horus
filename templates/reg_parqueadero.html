@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crear / Editar Parqueadero</title>
+</head>
+<body>
+  <main>
+    <h1>Registro de Parqueadero</h1>
+
+    <form action="/parqueadero/modificar" method="post" novalidate>
+      </div>
+
+      <!-- Capacidades (números) -->
+      <fieldset>
+        <legend>Capacidades</legend>
+
+        <div>
+          <label for="capacidad_carros">Capacidad carros</label><br />
+          <input type="number" id="capacidad_carros" name="capacidad_carros" min="0" step="1" value="0" />
+        </div>
+
+        <div>
+          <label for="capacidad_motos">Capacidad motos</label><br />
+          <input type="number" id="capacidad_motos" name="capacidad_motos" min="0" step="1" value="0" />
+        </div>
+      </fieldset>
+
+      <div>
+        <button type="submit">Guardar Parqueadero</button>
+        <button type="reset">Limpiar</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>
