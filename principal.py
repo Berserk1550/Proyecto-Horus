@@ -1,5 +1,5 @@
 from conexion import *
-from routes.r_usuarios import *
+from routes import r_parqueadero, r_usuarios
 
 
 @programa.route("/")

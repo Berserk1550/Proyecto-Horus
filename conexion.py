@@ -1,5 +1,6 @@
 import mysql.connector
 from flask import Flask, redirect, render_template, request, send_from_directory, session
+from flask_restful import Resource, Api
 import hashlib
 from datetime import datetime
 
@@ -12,7 +13,7 @@ mi_db = mysql.connector.connect(
     port="3306",
     user="root",
     password="",
-    database="bd_parqueo"
+    database="base_pruebas"
 )
 
 programa.secret_key = "super_segura"
