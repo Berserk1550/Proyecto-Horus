@@ -13,7 +13,7 @@ mi_db = mysql.connector.connect(
     port="3306",
     user="root",
     password="",
-    database="base_pruebas"
+    database="bd_parqueadero"
 )
 
 programa.secret_key = "super_segura"
