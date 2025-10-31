@@ -2,19 +2,17 @@ from conexion import *
 
 class Parqueadero:
 
-    def consultarParqueadero(self,nit): # esta función busca datos de la tabla parqueadero según el NIT
-        # Consulta SQL que obtiene las capacidades de carros y motos del parqueadero
-        sql = "SELECT capacidad_carros_pequenos, capacidad_carros_grandes, capacidad_motos WHERE nit = %s AND estado = %s"
-        # Ejecuta la consulta pasando el parámetro nit (aunque aquí hay un error, debería pasarse como tupla)
-        mi_cursor.execute(sql(nit))
-        # Obtiene todos los resultados de la consulta
+    def consultarEspacios(self, nit):
+        sql = "SELECT  tipo, dimension, ocupado FROM espacios WHERE parqueadero_nit = %s"
+        mi_cursor.execute(sql, (nit,))  
         resultado = mi_cursor.fetchall()
-        # Devuelve los resultados
+        print(f"espacios recogidos = ${resultado}")
         return resultado
+
     
     def modificarEspacios(self,nit,capacidad_carro_pqnos,capacidad_carro_grdes,capacidad_motos):
         # Define el SQL para actualizar las capacidades del parqueadero
-        sql = "UPDATE parqueadero SET capacidad_carros_pequenos =%s, capacidad_carros_grandes = %s, capacidad_motos %s WHERE nit = %s"
+        sql = "UPDATE parqueadero SET capacidad_carros_pequenos =%s, capacidad_carros_grandes = %s, capacidad_motos =%s WHERE nit = %s"
         
         # Ejecuta el UPDATE en la base de datos con los valores recibidos
         mi_cursor.execute(sql, (capacidad_carro_pqnos, capacidad_carro_grdes, capacidad_motos, nit))

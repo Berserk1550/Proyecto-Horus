@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, session
 from datetime import datetime
-from conexion import conexion, mi_cursor
+from conexion import *
 
 
 @programa.route('/convenios', methods=['GET', 'POST'])
@@ -41,7 +41,7 @@ def convenios():
             return render_template("form_convenios.html", msg=mensaje)
         sql_insert = """INSERT INTO convenios (tipo_convenio, identificacion, nombre, descuento_carro, descuento_moto, estado, fecha_registro, parqueadero_nit) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
         mi_cursor.execute(sql_insert,(tipo_convenio, identificacion, nombre, descuento_carro, descuento_moto, estado, fecha_registro, parqueadero_nit))
-        conexion.commit()
+        mi_db.commit()
         
 
         return redirect('/opciones')

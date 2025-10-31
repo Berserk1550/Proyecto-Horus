@@ -15,16 +15,13 @@ def parqueadero():
 # -----------------------------------------
 @programa.route("/consultar_espacios")
 def consultarEspacio():
-    
-    
-    # Obtiene el NIT del parqueadero desde la sesión
     nit = session["parqueadero_nit"]
-    
-    # Llama a la función que consulta las capacidades del parqueadero en la base de datos
-    respuesta = mi_parqueadero.consultarParqueadero(nit)
-    
-    # Renderiza la plantilla HTML con los datos obtenidos
-    return render_template("consultar_espacios.html", datos=respuesta)
+
+    # Llama al método del modelo corregido
+    respuesta = mi_parqueadero.consultarEspacios(nit)
+
+    # Envía los datos al template
+    return render_template("consultar_espacios.html", espacios=respuesta)
 
 # -----------------------------------------
 # RUTA PARA MODIFICAR/AGREGAR ESPACIOS
