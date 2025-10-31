@@ -17,9 +17,8 @@ class Usuario:
     def ingresar_usuario(self, cedula, nombres, apellidos, correo, telefono, tel_emergencia, contrasena, rol, parqueadero_nit, fecha_registro):
         contrasena_cifrada = hashlib.sha512(contrasena.encode("utf-8")).hexdigest()
         sql="INSERT INTO usuarios (cedula, nombres, apellidos, correo, telefono, tel_emergencia, contrasena, rol, parqueadero_nit, fecha_registro) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        mi_cursor.execute(sql,(cedula, nombres, apellidos, correo, telefono, tel_emergencia, contrasena, rol, parqueadero_nit, fecha_registro))
-        mi_db.commit()
-    
+        mi_cursor.execute(sql,(cedula, nombres, apellidos, correo, telefono, tel_emergencia, contrasena_cifrada, rol, parqueadero_nit, fecha_registro))
+        conexion.commit()
 
 mi_usuario = Usuario()
 

@@ -43,4 +43,4 @@ def crear_usuario():                            #iniciamos registro del usuario/
 
         mi_usuario.ingresar_usuario(cedula, nombres, apellidos, correo, telefono, tel_emergencia, contrasena, rol, parqueadero_nit, fecha_registro)
         return redirect("/opciones")
-    return render_template("reg_portero.html")  # ← muestra el formulario si no se ha enviado # si no es POST, es GET → mostrar el formulario
+    return render_template("reg_portero.html")  # ← muestra el formulario si no se ha enviado # si no es POST, es GET → mostrar el formulario 
