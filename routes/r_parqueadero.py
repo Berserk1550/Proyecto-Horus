@@ -15,6 +15,8 @@ def parqueadero():
 # -----------------------------------------
 @programa.route("/consultar_espacios")
 def consultarEspacio():
+    
+    
     # Obtiene el NIT del parqueadero desde la sesión
     nit = session["parqueadero_nit"]
     
@@ -29,28 +31,31 @@ def consultarEspacio():
 # -----------------------------------------
 @programa.route("/espacios/modificar", methods=["GET", "POST"])
 def modificar_espacios():
-    if request.method == "GET":
-        # Si es GET, solo muestra el formulario para agregar o modificar espacios
-        return render_template("agregar_espacios.html")
-    
-    if request.method == "POST":
-        # Si es POST, significa que se enviaron los datos del formulario
+    if session.get("login") == True:
+        if request.method == "GET":
+            # Si es GET, solo muestra el formulario para agregar o modificar espacios
+            return render_template("agregar_espacios.html")
         
-        # Obtiene el NIT del parqueadero desde la sesión
-        nit = session.get("parqueadero_nit")
-        
-        # Obtiene las capacidades enviadas por el formulario y las convierte a enteros
-        capacidad_carro_pequeno = int(request.form["capacidad_carros_pequenos"])
-        capacidad_carro_grande = int(request.form["capacidad_carros_grandes"])
-        capacidad_motos = int(request.form["capacidad_motos"])
+        if request.method == "POST":
+            # Si es POST, significa que se enviaron los datos del formulario
+            
+            # Obtiene el NIT del parqueadero desde la sesión
+            nit = session.get("parqueadero_nit")
+            
+            # Obtiene las capacidades enviadas por el formulario y las convierte a enteros
+            capacidad_carro_pequeno = int(request.form["capacidad_carros_pequenos"])
+            capacidad_carro_grande = int(request.form["capacidad_carros_grandes"])
+            capacidad_motos = int(request.form["capacidad_motos"])
 
-        # Llama a la función que actualiza las capacidades en la base de datos
-        datos = mi_parqueadero.modificarEspacios(
-            nit,
-            capacidad_carro_pequeno,
-            capacidad_carro_grande,
-            capacidad_motos
-        )
+            # Llama a la función que actualiza las capacidades en la base de datos
+            datos = mi_parqueadero.modificarEspacios(
+                nit,
+                capacidad_carro_pequeno,
+                capacidad_carro_grande,
+                capacidad_motos
+            )
 
-    # Redirige de nuevo a la página principal del parqueadero después de modificar
-    return redirect("/parqueadero")
+        # Redirige de nuevo a la página principal del parqueadero después de modificar
+        return redirect("/parqueadero")
+    else:
+        return redirect("/")
