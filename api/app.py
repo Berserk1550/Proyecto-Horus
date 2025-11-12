@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template, session
 from flask_restful import Resource, Api
 from conexion import conexion, cursor  # Importación directa desde tu nuevo conexion.py
+from r_convenios import convenios 
 
 programa = Flask(__name__)
 api = Api(programa)
