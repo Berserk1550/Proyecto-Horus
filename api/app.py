@@ -1,7 +1,11 @@
 from flask import Flask, request, jsonify, render_template, session
 from flask_restful import Resource, Api
+<<<<<<< HEAD
 from conexion import conexion, cursor  # Importación directa desde tu nuevo conexion.py
 from r_convenios import convenios 
+=======
+from conexion import *  # Importación directa desde tu nuevo conexion.py
+>>>>>>> 5e906bcfc2048c80e7730c8c34801004d6a206e0
 
 programa = Flask(__name__)
 api = Api(programa)
@@ -9,8 +13,8 @@ api = Api(programa)
 # Ejemplo de recurso: lista de usuarios
 class UsuarioLista(Resource):
     def get(self):
-        cursor.execute("SELECT * FROM usuarios")
-        resultado = cursor.fetchall()
+        mi_cursor.execute("SELECT * FROM usuarios")
+        resultado = mi_cursor.fetchall()
         usuarios = []
         for u in resultado:
             usuarios.append({
@@ -25,8 +29,8 @@ class UsuarioLista(Resource):
 # Ejemplo de recurso: usuario individual
 class Usuario(Resource):
     def get(self, id):
-        cursor.execute("SELECT * FROM usuarios WHERE id = %s", (id,))
-        u = cursor.fetchone()
+        mi_cursor.execute("SELECT * FROM usuarios WHERE id = %s", (id,))
+        u = mi_cursor.fetchone()
         if u:
             return jsonify({
                 "id": u["id"],
@@ -41,6 +45,8 @@ class Usuario(Resource):
 # Registro de rutas
 api.add_resource(UsuarioLista, "/usuarios")
 api.add_resource(Usuario, "/usuarios/<int:id>")
+
+print("tangamandapio")
 
 # Ejecución del servidor
 if __name__ == "__main__":

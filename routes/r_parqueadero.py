@@ -40,15 +40,13 @@ def modificar_espacios():
             nit = session.get("parqueadero_nit")
             
             # Obtiene las capacidades enviadas por el formulario y las convierte a enteros
-            capacidad_carro_pequeno = int(request.form["capacidad_carros_pequenos"])
-            capacidad_carro_grande = int(request.form["capacidad_carros_grandes"])
+            capacidad_carro = int(request.form["capacidad_carros"])
             capacidad_motos = int(request.form["capacidad_motos"])
 
             # Llama a la función que actualiza las capacidades en la base de datos
             datos = mi_parqueadero.modificarEspacios(
                 nit,
-                capacidad_carro_pequeno,
-                capacidad_carro_grande,
+                capacidad_carro,
                 capacidad_motos
             )
 

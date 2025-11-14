@@ -1,5 +1,5 @@
 from conexion import *
-from routes import r_parqueadero, r_usuarios
+from routes import r_parqueadero, r_usuarios, r_tarifa
 
 
 @programa.route("/")
