@@ -3,7 +3,7 @@ from conexion import *
 class Parqueadero:
 
     def consultarEspacios(self, nit):
-        sql = "SELECT capacidad_carros,capacidad_motos,operaciones_carro,operaciones_moto FROM espacios WHERE parqueadero_nit = %s"
+        sql = "SELECT capacidad_carros,capacidad_motos,operaciones_carro,operaciones_moto FROM parqueadero WHERE nit = %s"
         mi_cursor.execute(sql, (nit,))  
         resultado = mi_cursor.fetchall()
         return resultado
