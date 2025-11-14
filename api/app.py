@@ -41,6 +41,8 @@ class Usuario(Resource):
 api.add_resource(UsuarioLista, "/usuarios")
 api.add_resource(Usuario, "/usuarios/<int:id>")
 
+print("tangamandapio")
+
 # Ejecución del servidor
 if __name__ == "__main__":
     programa.run(host="0.0.0.0", debug=True, port=8001)
