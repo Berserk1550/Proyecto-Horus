@@ -5,15 +5,15 @@ from models.m_usuarios import mi_usuario
 #este metodo se encarga de dar ingreso al programa al usuaurio
 @programa.route("/login", methods = ['POST'])
 def login():
-    id = request.form['idusuario']
-    contra = request.form['contra']
-    resultado = mi_usuario.loguear(id,contra)
+    cedula = request.form['Usuario_c']
+    resultado = mi_usuario.loguear(id,cedula)
     if len(resultado)==0: #<--- si el tamaño de la respuesta es 0 == usuario no existente 
-        return render_template("index.html",msg="Credenciales incorrectas")
+        return render_template("index.html",msg="Cedula No Registrada.")
     else:
         usuario = resultado[0] 
         if usuario["activo"] != "inactivo": #<-- se valida si el usuario esta activo
             session["login"] = True
+            session["cedula"] = usuario["cedula"]
             session["nombres"] = usuario["nombres"]
             session["rol"] = usuario["rol"]
             session["activo"] = usuario["activo"]
@@ -35,12 +35,11 @@ def crear_usuario():                            #iniciamos registro del usuario/
         correo=request.form['correo']
         telefono=request.form['telefono']
         tel_emergencia=request.form['tel_emergencia']
-        contrasena=request.form['contrasena']
         rol=request.form['rol']
         parqueadero_nit = session.get("parqueadero_nit")
         fecha_registro = datetime.today().strftime('%Y-%m-%d')
 
 
-        mi_usuario.ingresar_usuario(cedula, nombres, apellidos, correo, telefono, tel_emergencia, contrasena, rol, parqueadero_nit, fecha_registro)
+        mi_usuario.ingresar_usuario(cedula, nombres, apellidos, correo, telefono, tel_emergencia, rol, parqueadero_nit, fecha_registro)
         return redirect("/opciones")
     return render_template("reg_portero.html")  # ← muestra el formulario si no se ha enviado # si no es POST, es GET → mostrar el formulario 
