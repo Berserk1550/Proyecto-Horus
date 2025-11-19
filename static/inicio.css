@@ -52,7 +52,7 @@ main#padre_ppall {
 }
 
 #padre_ppall #tlo {
-  color: #a29880;
+  color: #DED0AF;
   text-align: center;
 }
 
@@ -80,7 +80,7 @@ form#form_acceso {
 }
 
 #form_acceso input {
-  background: rgba(14, 0, 48, 0.6);
+  background: rgba(14, 0, 48, 0.9);
   color: #e3fafa;
   border: none;
   font-size: 0.9em;
@@ -107,9 +107,10 @@ form#form_acceso {
 
 /* Botón de entrada */
 #form_acceso #btn_Entrar {
-  background: #0e0030;
+  background: rgba(0, 6, 128, 0.9);
   color: #e3fafa;
   border-radius: 20px;
+  border: none;
   padding: 15px;
   width: 150px;
 }

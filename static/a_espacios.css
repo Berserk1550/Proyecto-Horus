@@ -30,7 +30,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  overflow: hidden;
+ 
 }
 
 body {
@@ -38,15 +38,10 @@ body {
   position: relative;
 }
 
-fieldset{
-    border: none;
-    margin: 0;
-    padding: 0;
-}
 
 h1{
     font-size: 20px;
-    color: #a29880;
+    color: #DED0AF;
 }
 
 main#cap_par {
@@ -56,9 +51,22 @@ main#cap_par {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
     margin-left: 15px;
 }
+
+
+#form_espacio input{
+    background: rgb(14, 0, 48);
+    border: none;
+}
+
+#form_espacio input::placeholder {
+  color: #e3fafa;       
+  font-family: inherit;
+  font-size: 19px;
+}
+
+
 
 input#capacidad_carros{
     border-radius: 20px 20px 20px 20px;
@@ -72,7 +80,7 @@ input#capacidad_motos{
 
 button{
     margin-top: 20px;
-    background-color: #4d0080;
+    background: rgba(0, 6, 128, 0.9);
     color: #e3fafa;
     font-size: 25px;
     border: none;
@@ -87,5 +95,36 @@ button{
 #form_espacio button#limpiar{
     padding: 5px 5px 5px 5px;
     border-radius: 10px 10px 10px 10px;
+    margin-left: 30px;
+}
+
+@media screen and (min-width: 1200px) {
+ 
+main#form_espacio {
+    height: 100vh;
+    flex-direction: column-reverse;
+}
+
+input#capacidad_carros{
+   font-size: 20px; 
+   padding: 30px;
+   border-radius: 30px;
+  }
+input#capacidad_motos{
+   font-size: 20px; 
+   padding: 30px;
+   border-radius: 30px;
+  }
+
+button{
+    font-size: 30px;
     margin-left: 20px;
+  }
+  #form_espacio input::placeholder {
+  color: #e3fafa;       
+  font-family: inherit;
+  font-size: 27px;
+}
+
+
 }
