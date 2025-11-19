@@ -4,7 +4,7 @@ from routes import r_parqueadero, r_usuarios, r_tarifa
 
 @programa.route("/")
 def raiz():
-    return render_template("index.html")
+    return render_template("inicio.html")
 
 @programa.route("/opciones")
 def opciones():
