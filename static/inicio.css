@@ -115,15 +115,6 @@ form#form_acceso {
   width: 150px;
 }
 
-/* Botón de registro */
-#form_acceso #Registro {
-  background: #0a1080;
-  color: #e3fafa;
-  border-radius: 9px 10px 9px 10px;
-  padding: 8px 9px;
-  width: 80px;
-}
-
 /* Estilos para pantallas grandes */
 @media screen and (min-width: 1200px) {
   #padre_ppall #tlo {
