@@ -4,29 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Capacidades del Parqueadero</title>
+    <link rel="stylesheet" href="../static/a_espacios.css" />
 </head>
 <body>
-      <main>
-    <h1>Modificar Capacidades del Parqueadero</h1>
-
+  
+  <main id="cap_par">
     <form action="/espacios/modificar" method="post" novalidate>
-      <fieldset>
-        <legend>Capacidades</legend>
 
+      <fieldset>
         <div>
-          <label for="capacidad_carros">Capacidad carros</label><br />
-          <input type="number" 
-          id="capacidad_carros" 
-          name="capacidad_carros"
-          maxlength="2000"
-          minlength="1"
-          pattern="[0-9]{1,2000}"
-          placeholder="capacidad de carros"
-          min="0" 
-          step="1" 
-          value="0" 
-          required />
-        </div>
+            <h1>Modificar Capacidades del Parqueadero</h1>
+            <input type="number" 
+            id="capacidad_carros" 
+            name="capacidad_carros"
+            maxlength="2000"
+            minlength="1"
+            pattern="[0-9]{1,2000}"
+            placeholder="capacidad de carros"
+            min="0" 
+            step="1" 
+            value="0" 
+            required />
+          </div>
 
         <div>
           <label for="capacidad_motos">Capacidad motos</label><br />
@@ -41,14 +40,15 @@
           step="1" 
           value="0" 
           required />
-
         </div>
+
       </fieldset>
 
       <div>
         <button type="submit">modificar Espacios</button>
         <button type="reset">Limpiar</button>
       </div>
+
     </form>
   </main>
 </body>

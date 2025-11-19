@@ -35,8 +35,7 @@ html, body {
 }
 
 body {
-  background: url("../static/fondo.jpg") center center / cover no-repeat;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  background: url("../static/fondo2.jpg") center center / cover no-repeat;
   position: relative;
   z-index: 1;
 }
@@ -53,7 +52,7 @@ main#padre_ppall {
 }
 
 #padre_ppall #tlo {
-  color: #4d0080;
+  color: #a29880;
   text-align: center;
 }
 
@@ -81,7 +80,7 @@ form#form_acceso {
 }
 
 #form_acceso input {
-  background: rgb(77, 0, 128);
+  background: rgba(14, 0, 48, 0.6);
   color: #e3fafa;
   border: none;
   font-size: 0.9em;
