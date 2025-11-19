@@ -34,10 +34,8 @@ html, body {
 }
 
 body {
-  background: url("../static/fondo2.jpg ") center center / cover no-repeat;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  background: url("../static/fondo3.jpg ") center center / cover no-repeat;
   position: relative;
-  z-index: 1;
 }
 
 fieldset{
@@ -47,5 +45,47 @@ fieldset{
 }
 
 h1{
-    font-size: 15px;
+    font-size: 20px;
+    color: #a29880;
+}
+
+main#cap_par {
+    background: rgba(227, 250, 250, 0.0);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-left: 15px;
+}
+
+input#capacidad_carros{
+    border-radius: 20px 20px 20px 20px;
+    padding: 20px 30px 20px 30px;
+}
+
+input#capacidad_motos{
+    border-radius: 20px 20px 20px 20px;
+    padding: 20px 30px 20px 30px;
+}
+
+button{
+    margin-top: 20px;
+    background-color: #4d0080;
+    color: #e3fafa;
+    font-size: 25px;
+    border: none;
+    cursor: pointer;
+}
+
+#form_espacio button#guardar{
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+#form_espacio button#limpiar{
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px 10px 10px 10px;
+    margin-left: 20px;
 }
