@@ -10,7 +10,7 @@
   <main id="padre_ppal">
 
     <section id="zona_funcional">
-      <h1 id="tlo">Registro</h1>
+      <h1 id="tlo">Registro de Portero</h1>
 
       <form action="/admin/agregar_usuario" method="post" name="forma_registro" id="forma_registro">
         <div id="cont_contenido">
@@ -39,22 +39,7 @@
             <input type="tel" name="tel_emergencia" placeholder="Teléfono de emergencia" required />
           </div>
 
-          <div class="cont-campos">
-            <input type="password" name="contrasena" placeholder="Contraseña" required />
-          </div>
-
-          <div class="cont-campos">
-            <input type="password" name="confirm_contra" placeholder="Confirmar contraseña" required />
-          </div>
-
-          <div class="cont-campos">
-            <select name="rol" required>
-              <option value="" disabled selected>Seleccionar rol</option>
-              <option value="admin">Admin</option>
-              <option value="portero">Portero</option>
-              <option value="cliente">Cliente</option>
-            </select>
-          </div>
+          <!-- Eliminados los campos de contraseña y rol -->
 
           <div class="cont-campos">
             <button type="submit" id="btn_continuar">Continuar</button>
