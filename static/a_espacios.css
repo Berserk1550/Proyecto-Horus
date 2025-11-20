@@ -41,7 +41,7 @@ body {
 
 h1{
     font-size: 20px;
-    color: #DED0AF;
+    color: #e3fafa;
 }
 
 main#cap_par {
@@ -119,7 +119,12 @@ input#capacidad_motos{
   }
 
 button{
+    margin-top: 20px;
+    background: rgba(0, 6, 128, 0.9);
+    color: #e3fafa;
     font-size: 30px;
+    border: none;
+    cursor: pointer;
     margin-left: 20px;
   }
   #form_espacio input::placeholder {
@@ -127,6 +132,5 @@ button{
   font-family: inherit;
   font-size: 27px;
 }
-
 
 }

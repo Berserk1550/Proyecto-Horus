@@ -20,3 +20,4 @@ mi_usuario = Usuario()
 
 #if __name__ == "__main__":
 #    print("Importación exitosa. Conexión establecida.")
+#EMILY DEBES HACER UN CONDIC<IONAL PARA EL CALCULO FINAL DE LAS TARIFAS, SEGUN LE CONVENGA AL CLIENTE POR EL TIEMPOP QUE EN SU DEFECTO PASE EL VEHICULO EN EL PARQUEADERO
