@@ -53,6 +53,7 @@ main#padre_ppal{
 
 .cont-campos input{
   background:rgba(14, 0, 48, 0.9);
+  color: #e3fafa;
   padding: 20px;
   border-radius: 20px;
   height: 7vh;
@@ -73,6 +74,7 @@ main#padre_ppal{
   margin-top: 20px;
   padding: 15px;
   width: 150px;
+  margin-left: 6px
 }
 
 @media screen and (min-width: 1200px) {
