@@ -5,8 +5,8 @@ from models.m_usuarios import mi_usuario
 #este metodo se encarga de dar ingreso al programa al usuaurio
 @programa.route("/login", methods = ['POST'])
 def login():
-    cedula = request.form['Usuario_c']
-    resultado = mi_usuario.loguear(id,cedula)
+    cedula = request.form['idusuario']
+    resultado = mi_usuario.loguear(cedula)
     if len(resultado)==0: #<--- si el tamaño de la respuesta es 0 == usuario no existente 
         return render_template("index.html",msg="Cedula No Registrada.")
     else:

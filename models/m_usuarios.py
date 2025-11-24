@@ -7,7 +7,7 @@ import hashlib
 
 class Usuario:
     
-    def loguear(self, cedula, contrasena):
+    def loguear(self, cedula):
         sql = """SELECT cedula, nombres, apellidos, rol, activo, parqueadero_nit FROM usuarios WHERE cedula = %s"""
         mi_cursor.execute(sql, (cedula,))
         resultado = mi_cursor.fetchall()

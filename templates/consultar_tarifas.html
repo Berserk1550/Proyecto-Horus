@@ -12,63 +12,50 @@
     </header>
 
     <main>
-        <!-- Tabla de tarifas -->
         <section>
-        <table border="1">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Tipo de Tarifa</th>
-                <th>Tipo de Vehículo</th>
-                <th>Valor 1ra Hora</th>
-                <th>Valor Hora Extra</th>
-                <th>Valor Jornada</th>
-                <th>Valor Día Completo</th>
-                <th>Hora Inicio</th>
-                <th>Hora Fin</th>
-                <th>Acciones</th>
-            </tr>
-            </thead>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Tipo de Tarifa</th>
+                        <th>Horario</th>
+                        <th>Tipo de Vehículo</th>
+                        <th>Valor</th>
+                        <th>Hora Inicio</th>
+                        <th>Hora Fin</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-            <!-- Ejemplo de fila (esto luego se genera dinámicamente con datos del servidor) -->
-            <!-- 
-            {% for tarifa in tarifas %}
-            -->
-            <tr>
-                <td>{{ tarifa.id_tarifas }}</td>
-                <td>{{ tarifa.tipo_tarifa }}</td>
-                <td>{{ tarifa.tipo_vehiculo }}</td>
-                <td>{{ tarifa.valor_primera_hora }}</td>
-                <td>{{ tarifa.valor_hora_extra }}</td>
-                <td>{{ tarifa.valor_jornada }}</td>
-                <td>{{ tarifa.valor_dia_completo }}</td>
-                <td>{{ tarifa.hora_inicio }}</td>
-                <td>{{ tarifa.hora_fin }}</td>
-                <td>
-                <!-- Botón Modificar -->
-                <form action="/modificar_tarifa/{{ tarifa.id_tarifas }}" method="get" style="display:inline;">
-                    <button type="submit">Modificar</button>
-                </form>
+                <tbody>
+                    {% for tarifa in tarifas %}
+                    <tr>
+                        <td>{{ tarifa.tipo_tarifa }}</td>
+                        <td>{{ tarifa.horario }}</td>
+                        <td>{{ tarifa.tipo_vehiculo }}</td>
+                        <td>{{ tarifa.valor_tarifa }}</td>
+                        <td>{{ tarifa.hora_inicio }}</td>
+                        <td>{{ tarifa.hora_fin }}</td>
 
-                <!-- Botón Eliminar -->
-                <form action="/eliminar_tarifa/{{ tarifa.id_tarifas }}" method="post" style="display:inline;">
-                    <button type="submit">Eliminar</button>
-                </form>
-                </td>
-            </tr>
-            <!-- 
-            {% endfor %}
-            -->
-            </tbody>
-        </table>
+                        <td>
+                            <form action="/modificar_tarifa/{{ tarifa.id_tarifas }}" method="get" style="display:inline;">
+                                <button type="submit">Modificar</button>
+                            </form>
+
+                            <form action="/eliminar_tarifa/{{ tarifa.id_tarifas }}" method="post" style="display:inline;">
+                                <button type="submit">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </section>
 
-        <!-- Botón para volver -->
         <form action="/tarifas" method="get">
-        <button type="submit">Volver</button>
+            <button type="submit">Volver</button>
         </form>
     </main>
 
 </body>
 </html>
+
