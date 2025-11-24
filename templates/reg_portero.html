@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../static/reg_por.css" />
   <title>Formulario de Registro</title>
 </head>
 <body>
@@ -10,57 +11,88 @@
   <main id="padre_ppal">
 
     <section id="zona_funcional">
-      <h1 id="tlo">Registro</h1>
+      <h1 id="tlo">Registro de Portero</h1>
 
       <form action="/admin/agregar_usuario" method="post" name="forma_registro" id="forma_registro">
         <div id="cont_contenido">
 
           <div class="cont-campos">
-            <input type="text" name="cedula" placeholder="Cédula" required />
+            <input 
+            type="text"  
+            maxlength="10"
+            minlength="10"
+            pattern="[0-9]{10}"
+            name="cedula" 
+            placeholder="Cédula de Ciudadanía" 
+            required />
           </div>
 
           <div class="cont-campos">
-            <input type="text" name="nombres" placeholder="Nombres" required />
+            <input 
+            type="text"
+            maxlength="65"
+            minlength="1"
+            pattern="[a-zA-Z0-9]{1,65}"
+            name="nombres" 
+            placeholder="Nombres" 
+            required />
           </div>
 
           <div class="cont-campos">
-            <input type="text" name="apellidos" placeholder="Apellidos" required />
+            <input 
+            type="text"
+            maxlength="21"
+            minlength="6"
+            name="apellidos" 
+            placeholder="Apellidos"
+            pattern="[a-zA-Z0-9]{6,21}"
+            required />
+            
           </div>
 
           <div class="cont-campos">
-            <input type="email" name="correo" placeholder="Correo electrónico" required />
+            <input 
+            type="email" 
+            name="correo"
+            maxlength="76"
+            minlength="7"
+            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{7,76}$"
+            placeholder="Correo electrónico" 
+            required />
           </div>
 
           <div class="cont-campos">
-            <input type="tel" name="telefono" placeholder="Teléfono" required />
+            <input 
+            type="tel" 
+            maxlength="10"
+            minlength="10"
+            pattern="[0-9]{10}"
+            name="telefono" 
+            placeholder="Teléfono" 
+            required />
           </div>
 
           <div class="cont-campos">
-            <input type="tel" name="tel_emergencia" placeholder="Teléfono de emergencia" required />
+            <input 
+            type="tel" 
+            maxlength="10"
+            minlength="10"
+            pattern="[0-9]{10}"
+            name="tel_emergencia" 
+            placeholder="Teléfono de emergencia" 
+            required />
           </div>
 
-          <div class="cont-campos">
-            <input type="password" name="contrasena" placeholder="Contraseña" required />
-          </div>
+          <!-- Eliminados los campos de contraseña y rol -->
 
-          <div class="cont-campos">
-            <input type="password" name="confirm_contra" placeholder="Confirmar contraseña" required />
-          </div>
+          
 
-          <div class="cont-campos">
-            <select name="rol" required>
-              <option value="" disabled selected>Seleccionar rol</option>
-              <option value="admin">Admin</option>
-              <option value="portero">Portero</option>
-              <option value="cliente">Cliente</option>
-            </select>
-          </div>
+        </div>
 
           <div class="cont-campos">
             <button type="submit" id="btn_continuar">Continuar</button>
           </div>
 
-        </div>
       </form>
     </section>
 
