@@ -43,7 +43,7 @@ def modificar_tarifa(id_tarifa):
 @programa.route("/modificar_tarifa/<int:id_tarifa>", methods=["POST"])
 def actualizar_tarifa(id_tarifa):
 
-    nit_parqueadero = session.get[]
+    nit_parqueadero = session["parqueadero_nit"]
     tipo_tarifa = request.form["tipo_tarifa"]
     horario = request.form["horario"]
     tipo_vehiculo = request.form["tipo_vehiculo"]
@@ -51,6 +51,6 @@ def actualizar_tarifa(id_tarifa):
     hora_inicio = request.form["hora_inicio"]
     hora_fin = request.form["hora_fin"]
 
-    mi_tarifa.actualizarTarifa(id_tarifa, tipo_tarifa,horario, tipo_vehiculo, valor_tarifa, hora_inicio, hora_fin)
+    mi_tarifa.actualizarTarifa(id_tarifa,nit_parqueadero, tipo_tarifa,horario, tipo_vehiculo, valor_tarifa, hora_inicio, hora_fin)
 
     return redirect("/consultar_tarifas")

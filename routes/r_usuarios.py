@@ -5,14 +5,19 @@ from models.m_usuarios import mi_usuario
 #este metodo se encarga de dar ingreso al programa al usuaurio
 @programa.route("/login", methods = ['POST'])
 def login():
-<<<<<<< HEAD
-    cedula = request.form['idusuario']
-=======
-    cedula = request.form['Usuario_C']
->>>>>>> edc4a29e84d5c86b291c2c9cf63b810f2ae36fad
+    
+    cedula = request.form["Usuario_C"]
+    
+    if not re.fullmatch(r"\d{6,15}", cedula):
+        
+        return render_template("inicio.html", msg="Formato de cédula inválido.")
+    
     resultado = mi_usuario.loguear(cedula)
-    if len(resultado)==0: #<--- si el tamaño de la respuesta es 0 == usuario no existente 
-        return render_template("index.html",msg="Cedula No Registrada.")
+    
+    if len(resultado)==0:#<--- si el tamaño de la respuesta es 0 == usuario no existente 
+    
+        return render_template("inicio.html",msg="Cedula No Registrada.")
+    
     else:
         usuario = resultado[0] 
         if usuario["activo"] != "inactivo": #<-- se valida si el usuario esta activo

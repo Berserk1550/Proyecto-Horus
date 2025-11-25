@@ -3,13 +3,26 @@ from conexion import *
 class Tarifas:
 
     def consultarTarifas(self, nit):
-        sql= "SELECT id_tarifas, tipo_tarifa, horario, tipo_vehiculo, valor_tarifa, hora_inicio, hora_fin FROM tarifas WHERE parqueadero_nit = %s"
-        
-        
-        mi_cursor.execute(sql,(nit,))
+        sql = """
+            SELECT id_tarifas, tipo_tarifa, horario, tipo_vehiculo,
+                valor_tarifa, hora_inicio, hora_fin
+            FROM tarifas
+            WHERE parqueadero_nit = %s
+        """
+
+        mi_cursor.execute(sql, (nit,))
         resultado = mi_cursor.fetchall()
-        
+
+        # 🔥 Convertir timedelta → "6 am" / "7 pm"
+        for r in resultado:
+            if isinstance(r["hora_inicio"], timedelta):
+                r["hora_inicio"] = (datetime.min + r["hora_inicio"]).strftime("%I %p").lstrip("0").lower()
+
+            if isinstance(r["hora_fin"], timedelta):
+                r["hora_fin"] = (datetime.min + r["hora_fin"]).strftime("%I %p").lstrip("0").lower()
+
         return resultado
+
 
     def consultarTarifaPorID(self, id_tarifa):
         sql = """
@@ -24,7 +37,6 @@ class Tarifas:
         # Formatear hora_inicio y hora_fin a 'HH:MM' para el input type="time"
         if resultado:
             # Verifica que no sea None antes de formatear
-            print(type(resultado['hora_inicio']))
             if resultado['hora_inicio'] != '':
                 resultado['hora_inicio'] = resultado['hora_inicio']
                 
