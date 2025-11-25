@@ -34,7 +34,7 @@ html, body {
 }
 
 body {
-  background: url("../static/fondo3.jpg ") center center / cover no-repeat;
+  background: url("../static/imagenes/fondo3.jpg ") center center / cover no-repeat;
   position: relative;
 }
 
