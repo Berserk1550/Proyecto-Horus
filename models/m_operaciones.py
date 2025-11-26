@@ -26,4 +26,4 @@ class Operaciones:
         mi_cursor.execute(sql,(parqueadero_nit))
         return mi_cursor.fetchall()
 
-mi_operacion = Operaciones()
+mi_operacion = Operaciones() 
