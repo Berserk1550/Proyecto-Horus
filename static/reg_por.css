@@ -54,7 +54,7 @@ main#padre_ppal{
 .cont-campos input{
   background:rgba(14, 0, 48, 0.9);
   color: #e3fafa;
-  padding: 20px;
+  padding: 20px; 
   border-radius: 20px;
   height: 7vh;
   border: none;
@@ -104,5 +104,7 @@ main#padre_ppal{
     margin-left: 165px;
     font-size: 20px;
   }
+
+
 
 }
