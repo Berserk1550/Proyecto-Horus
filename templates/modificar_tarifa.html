@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../static/modifcar.css" />
+  <title>Modificar Tarifa</title>
+</head>
+<body>
+
+  <h1 id="tlo">Modificar Tarifa</h1>
+
+  <main id="padre_tarifa">
+    <div id="cont_contenido">
+
+      <legend>Configuración de la Tarifa</legend>
+
+      <form action="/admin/modificar_tarifa" method="post" name="forma_registro" id="forma_registro">
+
+        <div id="tipo_tarifa" name="tipo_tarifa" required>
+          <input value="primera_hora" {% if tarifa.tipo_tarifa == 'primera_hora' %}selected{% endif %}></input>
+          <input value="hora_extra" {% if tarifa.tipo_tarifa == 'hora_extra' %}selected{% endif %}>Valor hora extra</input>
+          <input value="jornada" {% if tarifa.tipo_tarifa == 'jornada' %}selected{% endif %}>Valor jornada</input>
+          <input value="dia_completo" {% if tarifa.tipo_tarifa == 'dia_completo' %}selected{% endif %}>Valor día completo</input>
+        </div>
+
+        <label for="horario">Horario:</label>
+        <div id="horario" name="horario" required>
+          <input value="diurno" {% if tarifa.horario == 'diurno' %}selected{% endif %}>Diurno</input>
+          <input value="nocturno" {% if tarifa.horario == 'nocturno' %}selected{% endif %}>Nocturno</input>
+        </div>
+
+        <label for="tipo_vehiculo">Tipo de Vehículo:</label>
+        <div id="tipo_vehiculo" name="tipo_vehiculo" required>
+          <input value="carro" {% if tarifa.tipo_vehiculo == 'carro' %}selected{% endif %}>Carro</input>
+          <input value="moto" {% if tarifa.tipo_vehiculo == 'moto' %}selected{% endif %}>Moto</input>
+        </div>
+
+        <label for="valor_tarifa">Valor de la Tarifa:</label>
+
+        <div id="cont_contenido">
+            <input 
+            type="number" 
+            id="valor_tarifa"
+            name="valor_tarifa" 
+            min="0" 
+            max="999999" 
+            value="{{ tarifa.valor_tarifa }}"
+            required
+            >
+        </div>
+        <legend>Horario Disponible</legend>
+
+        <label for="hora_inicio">Hora de Inicio:</label>
+
+        <div id="cont_contenido">       
+            <input 
+            type="time" 
+            id="hora_inicio" 
+            name="hora_inicio" 
+            value="{{ tarifa.hora_inicio }}"
+            required
+            >
+        </div>
+
+        <label for="hora_fin">Hora de Fin:</label>
+
+        <div id="cont_contenido">       
+            <input 
+            type="time" 
+            id="hora_fin" 
+            name="hora_fin" 
+            value="{{ tarifa.hora_fin }}"
+            required
+            >
+        </div>
+
+      </form>
+    </div>
+
+        <button type="submit">Guardar Cambios</button>
+
+    <form action="/consultar_tarifas" method="get">
+      <button type="submit">Volver</button>
+    </form>
+  </main>
+
+</body>
+</html>
