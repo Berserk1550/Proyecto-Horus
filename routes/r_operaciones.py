@@ -20,4 +20,4 @@ def saluda():
         return redirect("/operaciones/vehiculos_activos")
 
 @programa.route("/operaciones/vehiculos_activos", methods=['GET'])
-def vehiculos_activos
+def vehiculos_activos()
