@@ -18,3 +18,6 @@ def saluda():
         vehiculo_placa = request.form['vehiculo_placa']
         mi_operacion.salida(vehiculo_placa)
         return redirect("/operaciones/vehiculos_activos")
+
+@programa.route("/operaciones/vehiculos_activos", methods=['GET'])
+def vehiculos_activos
