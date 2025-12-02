@@ -1,6 +1,5 @@
 import mysql.connector
 from flask import Flask, redirect, render_template, request, send_from_directory, session
-from flask_restful import Resource, Api
 import hashlib
 from datetime import datetime, timedelta
 import re

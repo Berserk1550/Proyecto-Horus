@@ -1,4 +1,4 @@
-from conexion import *
+from conexion import*
 from routes import r_parqueadero, r_usuarios, r_tarifa
 
 
