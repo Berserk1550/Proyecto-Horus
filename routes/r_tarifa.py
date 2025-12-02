@@ -54,3 +54,12 @@ def actualizar_tarifa(id_tarifa):
     mi_tarifa.actualizarTarifa(id_tarifa,nit_parqueadero, tipo_tarifa,horario, tipo_vehiculo, valor_tarifa, hora_inicio, hora_fin)
 
     return redirect("/consultar_tarifas")
+
+@programa.route("/eliminar_tarifa/<int:id_tarifa>", methods=["POST"])
+def eliminar_tarifa(id_tarifa):
+    resultado = mi_tarifa.eliminarTarifa(id_tarifa)
+    
+    if resultado == "ok":
+        return redirect("/consultar_tarifas")  # Redirige a la lista de tarifas
+    else:
+        return "Error al eliminar la tarifa", 500

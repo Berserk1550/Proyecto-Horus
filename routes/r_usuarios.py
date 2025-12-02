@@ -8,7 +8,7 @@ def login():
     
     cedula = request.form["Usuario_C"]
     
-    if not re.fullmatch(r"\d{6,15}", cedula):
+    if not re.fullmatch(r"\d{6,10}", cedula):
         
         return render_template("inicio.html", msg="Formato de cédula inválido.")
     
