@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Procesos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/operaciones.css') }}">
 </head>
 <body>
 
@@ -11,9 +12,6 @@
 
     <!-- Barra superior -->
     <header id="barra_superior">
-      <nav id="menu_hamburguesa">
-        <button id="btn_menu">☰</button>
-      </nav>
       <section id="reloj">
         <span id="hora_actual">00:00</span>
       </section>
@@ -21,25 +19,38 @@
 
     <!-- Zona funcional -->
     <section id="zona_funcional">
-      <h1 id="tlo">Procesos de ingreso y egreso</h1>
+        <h1 id="tlo">Procesos de ingreso y egreso</h1>
+<!-- iconos de acción -->
+    <div id="grupo_iconos">
+        <button type="button" id="btn_carro" class="icono-accion" aria-label="Registrar ingreso/egreso de carro">
+            <img src="static/imagenes/carro.svg" alt="Icono de carro">
+            <span>Carro</span>
+        </button>
+
+        <button type="button" id="btn_moto" class="icono-accion" aria-label="Registrar ingreso/egreso de moto">
+            <img src="static/imagenes/moto.svg" alt="Icono de moto">
+            <span>Moto</span>
+        </button>
+    </div>
 
       <!-- Grupo de botones -->
       <div id="grupo_botones">
-        <button type="button" onclick="mostrarIngreso()">Ingreso</button>
-        <button type="button" onclick="mostrarEgreso()">Egreso</button>
+         <input type="text" id="placa" name="placa" placeholder="Digite la placa" required>
+        <button type="button" id="btn_ingreso">Ingreso</button>
+        <button type="button" id="btn_egreso">Egreso</button>
       </div>
 
       <!-- Ventana emergente -->
       <div id="ventana_proceso" style="display:none;">
         <!-- Formulario ingreso -->
         <form method="POST" action="/operaciones/ingreso" id="form_ingreso" style="display:none;">
-          <input type="text" name="placa" placeholder="Ingrese placa" required />
+          <input type="text" name="vehiculo_placa" placeholder="Ingrese placa" required />
           <button type="submit">Registrar ingreso</button>
         </form>
 
         <!-- Formulario egreso -->
         <form method="POST" action="/operaciones/salida" id="form_egreso" style="display:none;">
-          <input type="text" name="placa" placeholder="Ingrese placa" required />
+          <input type="text" name="vehiculo_placa" placeholder="Ingrese placa" required />
           <button type="submit">Registrar egreso</button>
         </form>
       </div>
@@ -76,7 +87,7 @@
         <h2>Registros previos</h2>
         <table>
           <tr><th>Placa</th><th>Cédula</th><th>Ingreso</th><th>Salida</th></tr>
-          {% for h in historico %}
+          {% for h in registros %}
             <tr>
               <td>{{ h.vehiculo_placa }}</td>
               <td>{{ h.usuario_cedula }}</td>
