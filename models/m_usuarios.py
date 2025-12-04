@@ -6,15 +6,61 @@ from conexion import *
 class Usuario:
     
     def loguear(self, cedula):
-        sql = """SELECT cedula, nombres, apellidos, rol, activo, parqueadero_nit FROM usuarios WHERE cedula = %s"""
-        mi_cursor.execute(sql, (cedula,))
+        sql = """SELECT cedula, nombres, apellidos, rol, activo, parqueadero_nit FROM usuarios WHERE cedula = %s AND activo = %s"""
+        estado = "activo"
+        mi_cursor.execute(sql, (cedula, estado,))
         resultado = mi_cursor.fetchall()
+        return resultado
+    
+    
+    def consultarUsuario(self,nit):
+        
+        sql = "SELECT cedula, nombres, apellidos, correo, telefono, tel_emergencia, fecha_registro FROM usuarios WHERE parqueadero_nit = %s AND rol = %s"
+        rol = "portero"
+        mi_cursor.execute(sql,(nit,rol,))
+        resultado = mi_cursor.fetchall()
+        
         return resultado
 
     def ingresar_usuario(self, cedula, nombres, apellidos, correo, telefono, tel_emergencia, rol, parqueadero_nit, fecha_registro):
         sql="INSERT INTO usuarios (cedula, nombres, apellidos, correo, telefono, tel_emergencia, rol, parqueadero_nit, fecha_registro) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         mi_cursor.execute(sql,(cedula, nombres, apellidos, correo, telefono, tel_emergencia, rol, parqueadero_nit, fecha_registro))
         mi_db.commit()
+        
+    
+    def consultarUsuarioPorCedula(self, cedula):
+        sql = """
+                SELECT cedula, nombres, apellidos, correo, telefono, tel_emergencia
+                FROM usuarios
+                WHERE cedula = %s
+            """
+        mi_cursor.execute(sql, (cedula,))
+        resultado = mi_cursor.fetchone()
+        mi_cursor.close()
+        mi_db.close()
+        return resultado
+
+    def actualizarUsuario(self, cedula, nombres, apellidos, correo, telefono, tel_emergencia):
+        sql = """
+            UPDATE usuarios
+            SET nombres=%s, apellidos=%s, correo=%s, telefono=%s, tel_emergencia=%s
+            WHERE cedula=%s
+        """
+        valores = (nombres, apellidos, correo, telefono, tel_emergencia, cedula)
+        mi_cursor.execute(sql, valores)
+        mi_db.commit()
+        mi_cursor.close()
+        mi_db.close()
+        return "ok"
+
+    def eliminarUsuario(self, cedula):
+        sql = """UPDATE tarifas
+                SET activo = 'inactivo'
+                WHERE activo = 'activo'
+                    AND cedula = %s"""
+        mi_cursor.execute(sql, (cedula,))
+        mi_db.commit()
+        return "ok"
 
 mi_usuario = Usuario()
 

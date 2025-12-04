@@ -1,6 +1,6 @@
 from datetime import datetime
 from conexion import *
-from models.m_usuarios import mi_usuario
+from models.m_usuarios import *
 
 #este metodo se encarga de dar ingreso al programa al usuaurio
 @programa.route("/login", methods = ['POST'])
@@ -31,6 +31,16 @@ def login():
         else:
             return render_template("index.html",msg="El usuario no esta activo") #<-- si el usuario no esta activo se devuelve un mesensaje informando
 
+@programa.route("/admin/consultar_usuario")
+def consultarUsuario():
+    
+    nit = session["parqueadero_nit"]
+    
+    respuesta = mi_usuario.consultarUsuario(nit)
+    
+    print(respuesta)
+    return render_template("consultar_usuario.html", usuarios = respuesta)
+
 @programa.route('/admin/agregar_usuario', methods=['GET', 'POST'])
 def crear_usuario():                            #iniciamos registro del usuario/portero a traves de un admin
     if not session.get("login") or session.get("rol") != "admin":
@@ -44,7 +54,7 @@ def crear_usuario():                            #iniciamos registro del usuario/
         correo=request.form['correo']
         telefono=request.form['telefono']
         tel_emergencia=request.form['tel_emergencia']
-        rol=request.form['rol']
+        rol="portero"
         parqueadero_nit = session.get("parqueadero_nit")
         fecha_registro = datetime.today().strftime('%Y-%m-%d')
 
@@ -52,3 +62,27 @@ def crear_usuario():                            #iniciamos registro del usuario/
         mi_usuario.ingresar_usuario(cedula, nombres, apellidos, correo, telefono, tel_emergencia, rol, parqueadero_nit, fecha_registro)
         return redirect("/opciones")
     return render_template("reg_portero.html")  # ← muestra el formulario si no se ha enviado # si no es POST, es GET → mostrar el formulario 
+
+# Mostrar formulario para modificar un usuario
+@programa.route("/modificar_usuario/<cedula>", methods=["GET"])
+def modificarUsuario(cedula):
+    usuario = mi_usuario.consultarUsuarioPorCedula(cedula)
+    return render_template("modifica_usuario.html", usuario=usuario)
+
+# Guardar cambios del usuario modificado
+@programa.route("/modificar_usuario/<cedula>", methods=["POST"])
+def actualizarUsuario(cedula):
+    nombres = request.form["nombres"]
+    apellidos = request.form["apellidos"]
+    correo = request.form["correo"]
+    telefono = request.form["telefono"]
+    tel_emergencia = request.form["tel_emergencia"]
+
+    mi_usuario.actualizarUsuario(cedula, nombres, apellidos, correo, telefono, tel_emergencia)
+    return redirect("/admin/consultar_usuario")
+
+# Eliminar usuario
+@programa.route("/eliminar_usuario/<cedula>", methods=["POST"])
+def eliminarUsuario(cedula):
+    mi_usuario.eliminarUsuario(cedula)
+    return redirect("/admin/consultar_usuario")
