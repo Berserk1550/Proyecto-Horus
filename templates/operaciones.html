@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procesos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/operaciones.css') }}">
+</head>
+<body>
+
+  <main id="padre_ppal">
+
+    <!-- Barra superior -->
+    <header id="barra_superior">
+      <section id="reloj">
+        <span id="hora_actual">00:00</span>
+      </section>
+    </header>
+
+    <!-- Zona funcional -->
+    <section id="zona_funcional">
+        <h1 id="tlo">Procesos de ingreso y egreso</h1>
+<!-- iconos de acción -->
+    <div id="grupo_iconos">
+        <button type="button" id="btn_carro" class="icono-accion" aria-label="Registrar ingreso/egreso de carro">
+            <img src="static/imagenes/carro.svg" alt="Icono de carro">
+            <span>Carro</span>
+        </button>
+
+        <button type="button" id="btn_moto" class="icono-accion" aria-label="Registrar ingreso/egreso de moto">
+            <img src="static/imagenes/moto.svg" alt="Icono de moto">
+            <span>Moto</span>
+        </button>
+    </div>
+
+      <!-- Grupo de botones -->
+      <div id="grupo_botones">
+         <input type="text" id="placa" name="placa" placeholder="Digite la placa" required>
+        <button type="button" id="btn_ingreso">Ingreso</button>
+        <button type="button" id="btn_egreso">Egreso</button>
+      </div>
+
+      <!-- Ventana emergente -->
+      <div id="ventana_proceso" style="display:none;">
+        <!-- Formulario ingreso -->
+        <form method="POST" action="/operaciones/ingreso" id="form_ingreso" style="display:none;">
+          <input type="text" name="vehiculo_placa" placeholder="Ingrese placa" required />
+          <button type="submit">Registrar ingreso</button>
+        </form>
+
+        <!-- Formulario egreso -->
+        <form method="POST" action="/operaciones/salida" id="form_egreso" style="display:none;">
+          <input type="text" name="vehiculo_placa" placeholder="Ingrese placa" required />
+          <button type="submit">Registrar egreso</button>
+        </form>
+      </div>
+
+      <!-- Contadores dinámicos -->
+      <div id="contadores">
+        <div class="contador">
+          <span class="icono">🚗</span>
+          <span class="espacios">{{ conteo_carros }}</span>
+        </div>
+        <div class="contador">
+          <span class="icono">🏍️</span>
+          <span class="espacios">{{ conteo_motos }}</span>
+        </div>
+      </div>
+
+      <!-- Tabla de activos -->
+      <section id="tabla_activos">
+        <h2>Vehículos activos</h2>
+        <table>
+          <tr><th>Placa</th><th>Cédula</th><th>Ingreso</th></tr>
+          {% for v in activos %}
+            <tr>
+              <td>{{ v.vehiculo_placa }}</td>
+              <td>{{ v.usuario_cedula }}</td>
+              <td>{{ v.fecha_ingreso }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </section>
+
+      <!-- Tabla histórico -->
+      <section id="tabla_historico">
+        <h2>Registros previos</h2>
+        <table>
+          <tr><th>Placa</th><th>Cédula</th><th>Ingreso</th><th>Salida</th></tr>
+          {% for h in registros %}
+            <tr>
+              <td>{{ h.vehiculo_placa }}</td>
+              <td>{{ h.usuario_cedula }}</td>
+              <td>{{ h.fecha_ingreso }}</td>
+              <td>{{ h.fecha_salida }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </section>
+
+    </section>
+
+  </main>
+
+  <script>
+    function mostrarIngreso() {
+      document.getElementById("ventana_proceso").style.display = "block";
+      document.getElementById("form_ingreso").style.display = "block";
+      document.getElementById("form_egreso").style.display = "none";
+    }
+    function mostrarEgreso() {
+      document.getElementById("ventana_proceso").style.display = "block";
+      document.getElementById("form_ingreso").style.display = "none";
+      document.getElementById("form_egreso").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>

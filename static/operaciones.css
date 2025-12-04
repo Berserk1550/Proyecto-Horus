@@ -1,0 +1,177 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Caja padre */
+#padre_ppal {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #fdfdfd;
+}
+
+/* Barra superior */
+#barra_superior {
+  background-color: #4a90e2;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+#reloj {
+  text-align: right;
+  font-size: 1.2rem;
+}
+
+/* Zona funcional */
+#zona_funcional {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+#tlo {
+  font-size: 2rem;
+  color: #343c54;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Grupo de iconos */
+#grupo_iconos {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+.icono-accion {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icono-accion img {
+  width: 200px !important;
+  height: 200px !important;
+  max-width: 200px !important;
+  max-height: 200px !important;
+  object-fit: contain;
+  display: block;
+}
+
+.icono-accion span {
+  margin-top: 8px;
+  font-size: 1rem;
+  color: #343c54;
+}
+
+/* Grupo de input y botones */
+#grupo_placa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+
+#grupo_placa #placa {
+  width: 280px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccd3e0;
+  border-radius: 8px;
+}
+
+#grupo_botones {
+  display: flex;
+  gap: 12px;
+}
+
+#grupo_botones button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #fff;
+}
+
+#btn_ingreso { background: #2e8b57; }  /* verde */
+#btn_egreso  { background: #b22222; }  /* rojo */
+
+/* Contadores */
+#contadores {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 20px 0;
+}
+
+.contador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.icono {
+  font-size: 2rem;
+}
+
+/* Tablas */
+#tabla_activos, #tabla_historico {
+  width: 90%;
+  margin: 20px auto;
+}
+
+#tabla_activos h2, #tabla_historico h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #4a90e2;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  border: 1px solid #ccd3e0;
+  padding: 8px;
+  text-align: center;
+}
+
+table th {
+  background-color: #f0f4f8;
+  color: #343c54;
+}
+
+table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  #grupo_iconos {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  #contadores {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  #grupo_placa #placa {
+    width: 100%;
+  }
+}
