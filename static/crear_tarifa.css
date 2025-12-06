@@ -24,11 +24,16 @@ figure img {
 html, body {
     margin: 0;
     padding: 0;
+    height: 100vh;
 }
 
 body{
     background: url("../static/imagenes/fondo3.jpg") center center / cover no-repeat;
     position : relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 input[type="time"]::-webkit-calendar-picker-indicator {
@@ -42,17 +47,18 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 #tlo{
     font-size: 15px;
     color: #e3fafa;
-    margin-left: 100px;
+    text-align: center;
 }
 
 
 
 main#padre_ppal {
-    margin: auto;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
     padding: 25px;
     border-radius: 20px;
-    margin-left: 20%;
 }
 
 select{
@@ -62,7 +68,7 @@ select{
     padding: 20px; 
     border-radius: 20px;
     border: none;
-    width: 190px;
+    width: 100%;
 }
 
 input{
@@ -71,13 +77,13 @@ input{
     padding: 20px; 
     border-radius: 20px;
     height: 7vh;
-    width: 190px;
+    width: 100%;
     text-align: center;
     border: none;
 }
 
 input#valor_tarifa{
-    width: 70%;
+    width: 100%;
 }
 
 input::placeholder {
@@ -88,9 +94,15 @@ input::placeholder {
 legend{
     color: #e3fafa;
     gap: 18px;
+    margin-top: 10px;
 }
 
-button {
+a {
+    text-decoration: none;
+    text-align: center;
+}
+
+.botones {
     background: rgba(0, 6, 128, 0.9);
     color: #e3fafa;
     border-radius: 20px;
@@ -98,14 +110,9 @@ button {
     margin-top: 20px;
     padding: 15px;
     width: 150px;
-    margin-left: 20px;
 }
 @media screen and (min-width: 1200px) {
 
-    main#padre_ppal {
-        align-items: center;
-        margin-left: 450px;
-    }
 
     .con_contenido {
         display: grid;
@@ -116,18 +123,18 @@ button {
     }
 
     input#valor_tarifa {
-        width: 50%;
+        width: 100%;
     }
 
     input {
-        width: 50%;
+        width: 100%;
         font-size: 20px;
         padding: 20px;
         border-radius: 20px;
     }
 
     select {
-        width: 50%;
+        width: 100%;
         font-size: 20px;
         padding: 20px;
         border-radius: 20px;
@@ -145,7 +152,7 @@ button {
 
     #con_botones {
         display: flex;
-        margin-left: 40px;
+        gap: 0px 10px;
     }
 
 

@@ -30,6 +30,13 @@ def login():
             return redirect ("/opciones")
         else:
             return render_template("index.html",msg="El usuario no esta activo") #<-- si el usuario no esta activo se devuelve un mesensaje informando
+        
+
+@programa.route("/cerrar_sesion")
+def cerrarSesion():
+    session.clear()
+    
+    return redirect("/")
 
 @programa.route("/admin/consultar_usuario")
 def consultarUsuario():

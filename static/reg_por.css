@@ -66,15 +66,24 @@ main#padre_ppal{
   gap: 18px;   
 }
 
-#forma_registro #btn_continuar{
+.cont-campos{
+  display: flex;
+  gap: 0px 10px;
+}
+
+a{
+  text-decoration: none;
+  text-align: center;
+}
+
+.botones{
   background: rgba(0, 6, 128, 0.9);
   color: #e3fafa;
   border-radius: 20px;
   border: none;
   margin-top: 20px;
   padding: 15px;
-  width: 150px;
-  margin-left: 60px
+  width: 100%;
 }
 
 @media screen and (min-width: 1200px) {
@@ -86,25 +95,18 @@ main#padre_ppal{
   }
 
   .cont-campos input {
+    align-items: center;
     background: rgba(14, 0, 48, 0.9);
+    display: flex;
     padding: 20px;
     border-radius: 20px;
-    height: 10vh;
     border: none;
+    text-align: center;
+
   }
 
-  #forma_registro #btn_continuar{
-    background: rgba(0, 6, 128, 0.9);
-    color: #e3fafa;
-    border-radius: 20px;
-    border: none;
-    margin-top: 50px;
-    padding: 20px;
-    width: 150px;
-    margin-left: 165px;
-    font-size: 20px;
+  #btn_continuar:hover{
+    background-color: green;
   }
-
-
 
 }

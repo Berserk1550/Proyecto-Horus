@@ -4,116 +4,102 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Procesos</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/operaciones.css') }}">
+  <link rel="stylesheet" href="../static/operaciones.css">
+  <script src="../static/js/reloj_operaciones.js"></script>
+  <script src="../static/js/emergente_operaciones.js"></script>
 </head>
 <body>
 
   <main id="padre_ppal">
-
-    <!-- Barra superior -->
     <header id="barra_superior">
       <section id="reloj">
-        <span id="hora_actual">00:00</span>
+        <span id="hora_actual"></span>
       </section>
     </header>
 
+    <h1 id="tlo">Procesos de Ingreso y Egreso</h1>
+
     <!-- Zona funcional -->
     <section id="zona_funcional">
-        <h1 id="tlo">Procesos de ingreso y egreso</h1>
-<!-- iconos de acción -->
-    <div id="grupo_iconos">
-        <button type="button" id="btn_carro" class="icono-accion" aria-label="Registrar ingreso/egreso de carro">
-            <img src="static/imagenes/carro.svg" alt="Icono de carro">
-            <span>Carro</span>
+
+      <!-- Iconos de acción -->
+      <div id="grupo_iconos">
+        <button type="button" id="btn_carro" class="icono-accion">
+          <img src="../static/imagenes/carro.svg" alt="Icono de carro">
+          <span>Carro</span>
         </button>
 
-        <button type="button" id="btn_moto" class="icono-accion" aria-label="Registrar ingreso/egreso de moto">
-            <img src="static/imagenes/moto.svg" alt="Icono de moto">
-            <span>Moto</span>
+        <button type="button" id="btn_moto" class="icono-accion">
+          <img src="../static/imagenes/moto.svg" alt="Icono de moto">
+          <span>Moto</span>
         </button>
-    </div>
+      </div>
 
-      <!-- Grupo de botones -->
+      <!-- Grupo de botones 
       <div id="grupo_botones">
-         <input type="text" id="placa" name="placa" placeholder="Digite la placa" required>
+        <input type="text" id="placa" name="placa" minlength="6" maxlength="6"
+               placeholder="N° Placa" required pattern="[A-Z0-9\-]{6,6}">
         <button type="button" id="btn_ingreso">Ingreso</button>
         <button type="button" id="btn_egreso">Egreso</button>
-      </div>
-
-      <!-- Ventana emergente -->
-      <div id="ventana_proceso" style="display:none;">
-        <!-- Formulario ingreso -->
-        <form method="POST" action="/operaciones/ingreso" id="form_ingreso" style="display:none;">
-          <input type="text" name="vehiculo_placa" placeholder="Ingrese placa" required />
-          <button type="submit">Registrar ingreso</button>
-        </form>
-
-        <!-- Formulario egreso -->
-        <form method="POST" action="/operaciones/salida" id="form_egreso" style="display:none;">
-          <input type="text" name="vehiculo_placa" placeholder="Ingrese placa" required />
-          <button type="submit">Registrar egreso</button>
-        </form>
-      </div>
+      </div>-->
 
       <!-- Contadores dinámicos -->
       <div id="contadores">
         <div class="contador">
           <span class="icono">🚗</span>
-          <span class="espacios">{{ conteo_carros }}</span>
+          <span class="espacios"></span>
         </div>
         <div class="contador">
           <span class="icono">🏍️</span>
-          <span class="espacios">{{ conteo_motos }}</span>
+          <span class="espacios"></span>
         </div>
       </div>
 
-      <!-- Tabla de activos -->
-      <section id="tabla_activos">
+      <!-- Tablas -->
+      <section id="tabla_activos" style="display:none;">
         <h2>Vehículos activos</h2>
         <table>
           <tr><th>Placa</th><th>Cédula</th><th>Ingreso</th></tr>
-          {% for v in activos %}
-            <tr>
-              <td>{{ v.vehiculo_placa }}</td>
-              <td>{{ v.usuario_cedula }}</td>
-              <td>{{ v.fecha_ingreso }}</td>
-            </tr>
-          {% endfor %}
+          <tr><td></td><td></td><td></td></tr>
         </table>
       </section>
 
-      <!-- Tabla histórico -->
-      <section id="tabla_historico">
+      <section id="tabla_historico" style="display:none;">
         <h2>Registros previos</h2>
         <table>
           <tr><th>Placa</th><th>Cédula</th><th>Ingreso</th><th>Salida</th></tr>
-          {% for h in registros %}
-            <tr>
-              <td>{{ h.vehiculo_placa }}</td>
-              <td>{{ h.usuario_cedula }}</td>
-              <td>{{ h.fecha_ingreso }}</td>
-              <td>{{ h.fecha_salida }}</td>
-            </tr>
-          {% endfor %}
+          <tr><td></td><td></td><td></td><td></td></tr>
         </table>
       </section>
 
     </section>
-
   </main>
 
-  <script>
-    function mostrarIngreso() {
-      document.getElementById("ventana_proceso").style.display = "block";
-      document.getElementById("form_ingreso").style.display = "block";
-      document.getElementById("form_egreso").style.display = "none";
-    }
-    function mostrarEgreso() {
-      document.getElementById("ventana_proceso").style.display = "block";
-      document.getElementById("form_ingreso").style.display = "none";
-      document.getElementById("form_egreso").style.display = "block";
-    }
-  </script>
+<!-- Modal único -->
+<div id="ventana_proceso" class="modal">
+  <div class="modal-contenido">
+    <span  id="cerrar" class="cerrar">&times;</span>
+    <form id="form_operacion">
+      <input type="text" name="vehiculo_placa" placeholder="Ingrese placa" required>
+      <input type="hidden" name="tipo_vehiculo" id="tipo_vehiculo_input">
+
+      <button type="button" id="registrar_ingreso">Registrar ingreso</button>
+      <button type="button" id="liberar_salida">Liberar salida</button>
+    </form>
+  </div>
+</div>
+    <!-- Formulario ingreso 
+    <form method="POST" action="/operaciones/ingreso" id="form_ingreso" style="display:none;">
+      <input type="text" name="vehiculo_placa" placeholder="Ingrese placa" required>
+      <button type="submit">Registrar ingreso</button>
+    </form>
+
+     Formulario egreso 
+    <form method="POST" action="/operaciones/salida" id="form_egreso" style="display:none;">
+      <input type="text" name="vehiculo_placa" placeholder="Ingrese placa" required>
+      <button type="submit">Registrar egreso</button>
+    </form>
+  -->
 
 </body>
 </html>

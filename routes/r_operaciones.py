@@ -1,5 +1,7 @@
 from conexion import *
+from flask import jsonify
 from models.m_operaciones import mi_operacion
+from models.m_tarifa import mi_tarifa
 
 @programa.route("/operaciones", methods=['GET'])
 def operaciones():
@@ -9,27 +11,73 @@ def operaciones():
     activos = mi_operacion.vehiculos_activos(parqueadero_nit)
     registros = mi_operacion.registros_previos(parqueadero_nit)
 
-    conteo_carros = len([v for v in activos if v('tipo_vehiculo') == 'carro'])
-    conteo_motos = len([v for v in activos if v('tipo_vehiculo') == 'moto'])
+    conteo_carros = len([v for v in activos if v.get('tipo_vehiculo') == 'carro'])
+    conteo_motos = len([v for v in activos if v.get('tipo_vehiculo') == 'moto'])
     return render_template("operaciones.html", activos=activos, registros=registros, conteo_carros=conteo_carros, conteo_motos=conteo_motos)
 
 @programa.route("/operaciones/ingreso", methods=['POST'])
 def ingreso():
     if not session.get("login"):
-        return redirect('/')
-    vehiculo_placa = request.form['vehiculo_placa']
+        return jsonify({"ok": False, "error": "no_session"}), 401
+    
+    vehiculo_placa = request.form.get('vehiculo_placa', '').strip().upper()
+    tipo_vehiculo = request.form.get('tipo_vehiculo')
     usuario_cedula = session.get('usuario_cedula')
     parqueadero_nit = session.get('parqueadero_nit')
-    mi_operacion.ingreso(vehiculo_placa, usuario_cedula, parqueadero_nit)
-    return redirect("/operaciones/vehiculos_activos")
+    
+    sql_check = """SELECT COUNT(*) FROM registros WHERE vehiculo_placa=%s AND parqueadero_nit=%s AND fecha_salida IS NULL"""
+    mi_cursor.execute(sql_check, (vehiculo_placa, parqueadero_nit))
+    if mi_cursor.fetchone()[0] > 0:
+        return jsonify({"ok": False, "error": "ya_activo"}), 409
+    
+    sql_insert = """INSERT INTO registros (vehiculo_placa, usuario_cedula, parqueadero_nit, fecha_ingreso, activo) VALUES (%s,%s,%s, NOW(), 'activo', %s)"""
+    mi_cursor.execute(sql_insert, (vehiculo_placa, usuario_cedula, parqueadero_nit))
+    mi_db.commit()
+    return jsonify({"ok": True, "vehiculo_placa": vehiculo_placa, "tipo_vehiculo": tipo_vehiculo})
 
 @programa.route("/operaciones/salida", methods=['POST'])
 def salida():
     if not session.get("login"):
-        return redirect('/')
-    vehiculo_placa = request.form['vehiculo_placa']
-    mi_operacion.salida(vehiculo_placa)
-    return redirect("/operaciones/vehiculos_activos")
+        return jsonify({"ok": False, "error": "no_session"}), 401
+    
+    vehiculo_placa = request.form.get('vehiculo_placa', '').strip().upper()
+    parqueadero_nit = session.get('parqueadero_nit')
+    
+    sql_activo = """SELECT r.id_registros, r.fecha_ingreso, t.tipo_vehiculo FROM registros r JOIN tarifas t ON r.tarifa_id = t.id_tarifas WHERE r.vehiculo_placa=%s AND r.parqueadero_nit=%s AND r.fecha_salida IS NULL LIMIT 1"""
+    mi_cursor.execute(sql_activo,(vehiculo_placa, parqueadero_nit))
+    reg = mi_cursor.fetchone()
+    if not reg:
+        return jsonify({"ok": False, "error": "no_activo"}), 404
+    
+    id_registros, fecha_ingreso, tipo_vehiculo = reg['id_registros'], reg[fecha_ingreso], reg[tipo_vehiculo]
+    
+    sql_min = "SELECT TIMESTAMPDIFF(MINUTEM, %s, NOW()) AS minutos"
+    mi_cursor.execute(sql_min, (fecha_ingreso,))
+    minutos = mi_cursor.fetchone()['minutos']
+    
+    tarifas = mi_tarifa.consultarTarifas(parqueadero_nit)
+    tarifa_usada = None
+    for t in tarifas:
+        if t['tipo_vehiculo'] == tipo_vehiculo:
+            tarifa_usada = t
+            break
+    if not tarifa_usada:
+        return jsonify({"ok": False, "error": "sin_tarifa"}), 405
+    
+    valor_base = tarifa_usada['valor_tarifa']
+    if minutos <=60 and tarifa_usada['tipo_tarifa'] == 'primera_hora':
+        total = valor_base
+    elif tarifa_usada['tipo_tarifa'] == 'hora_extra':
+        horas = (minutos - 60 + 59) // 60 if minutos > 60 else 0
+        total = valor_base + max(horas, 1)
+    else:
+        total = valor_base
+        
+    sql_update = """UPDATE registros SET fecha_Salida = NOW(), total = %s, activo='inactivo', tarifa_id=%s WHERE id_registros=%s"""
+    mi_cursor.execute(sql_update,(total, tarifa_usada['id_tarifas'], id_registros))
+    mi_db.commit()
+    
+    return jsonify({"ok": True, "vehiculo_placa": vehiculo_placa, "tipo_vehiculo": tipo_vehiculo, "fecha_ingreso": str(fecha_ingreso), "minutos": minutos, "tarifa": tarifa_usada, "total": float(total)})
 
 @programa.route("/operaciones/vehiculos_activos", methods=['GET'])
 def vehiculos_activos():

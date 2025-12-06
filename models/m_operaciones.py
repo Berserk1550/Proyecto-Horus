@@ -1,4 +1,4 @@
-from conexion import *
+from conexion import mi_cursor, mi_db
 from datetime import datetime
 import sys
 import os
@@ -19,12 +19,12 @@ class Operaciones:
         mi_db.commit()
 
     def vehiculos_activos(self, parqueadero_nit):
-        sql = """SELECT id_registros, vehiculo_placa, usuario_cedula, fecha_ingreso, tipo_vehiculo FROM registros WHERE parqueadero_nit = %s AND fecha_salida IS NULL ORDER BY fecha_ingreso DESC"""
+        sql = """SELECT r.id_registros, r.vehiculo_placa, r.usuario_cedula, r.fecha_ingreso, t.tipo_vehiculo FROM registros r JOIN tarifas t ON r.tarifa_id = t.id_tarifas WHERE r.parqueadero_nit = %s AND r.fecha_salida IS NULL ORDER BY r.fecha_ingreso DESC"""
         mi_cursor.execute(sql,(parqueadero_nit,))
         return mi_cursor.fetchall()
 
     def registros_previos(self, parqueadero_nit):
-        sql = """SELECT id_registros, vehiculo_placa, parqueadero_nit, fecha_ingreso, fecha_salida, tipo_vehiculo FROM registros WHERE parqueadero_nit= %s AND fecha_salida IS NOT NULL ORDER BY fecha_salida DESC"""
+        sql = """SELECT r.id_registros, r.vehiculo_placa, r.parqueadero_nit, r.fecha_ingreso, r.fecha_salida, t.tipo_vehiculo FROM registros r JOIN tarifas t ON r.tarifa_id = t.id_tarifas WHERE r.parqueadero_nit= %s AND r.fecha_salida IS NOT NULL ORDER BY r.fecha_salida DESC"""
         mi_cursor.execute(sql,(parqueadero_nit,))
         return mi_cursor.fetchall()
 

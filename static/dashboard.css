@@ -25,6 +25,18 @@ main.dashboard {
     margin: auto;
 }
 
+#cerrar_sesion {
+    text-decoration: none;
+    background-color: #f33;
+    color: blanchedalmond;
+    padding: 18px;
+    border-radius: 10px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    text-align: center;
+}
+
 /* Tarjetas */
 .card {
     background: rgba(14, 0, 48, 1);

@@ -8,27 +8,46 @@
 </head>
 <body>
 
-  <a href="/servicios">Gestión de servicios prestados</a><br>
+  <a href="/cerrar_sesion" id="cerrar_sesion">Cerrar Sesion</a>
 
-  {% if rol == "admin" %}
-    <label for="gestion_usuarios">Gestión de parqueadero</label>
-    <select id="gestion_usuarios" onchange="redirigirUsuario(this.value)">
-      <option value="">Seleccionar opción</option>
-      <option value="/admin/agregar_usuario">Crear Usuario</option>
-      <option value="/admin/activar">Activar Usuario</option>
-      <option value="/admin/desactivar">Desactivar Usuario</option>
-      <option value="/admin/editar">Editar Usuario</option>
-      <option value="/admin/eliminar">Eliminar Usuario</option>
-    </select>
-    <br>
+  <div>
 
-    <a href="/parqueadero">Gestion de parqueadero</a>
-    <a href="/tarifas">Gestión de tarifas</a><br>
-    <a href="/convenios">Gestión de convenios</a><br>
-  {% endif %}
 
-  <br>
-  <h2>Bienvenido(a) {{ nom }}</h2>
+    <main class="dashboard">
+
+      <section class="card">
+        
+        <a href="/operaciones" id="servicios">Gestión de servicios prestados</a>
+      </section>
+
+      <section class="card">
+        
+        <label for="gestion_usuarios" >Gestion de empleados</label>
+        <select id="gestion_usuarios" onchange="redirigirUsuario(this.value)">
+          <option value="">Seleccionar</option>
+          <option value="/admin/agregar_usuario">Crear Usuario</option>
+          <option value="/admin/consultar_usuario">Consultar Usuario</option>
+        </select>
+
+      </section>
+
+      <section class="card">
+        
+        <a href="/parqueadero" id="parqueo">Gestionar parqueadero</a>
+      </section>
+
+      <section class="card">
+        <label for="gestion_tarifas" >Gestion de Tarifas</label>
+        <select id="gestion_usuarios" onchange="redirigirUsuario(this.value)">
+          <option value="">Seleccionar</option>
+          <option value="/consultar_tarifas">Consultar Tarifas</option>
+          <option value="/crear_tarifas">Crear Tarifas</option>
+        </select>
+      </section>
+
+      
+
+    </main>
 
     <script>
       function redirigirUsuario(ruta) {
