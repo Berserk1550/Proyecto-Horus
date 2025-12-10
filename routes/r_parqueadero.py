@@ -5,10 +5,6 @@ from models.m_parqueadero import *  # Importa la clase Parqueadero y su instanci
 # -----------------------------------------
 # RUTA PRINCIPAL DEL PARQUEADERO
 # -----------------------------------------
-@programa.route("/parqueadero")
-def parqueadero():
-    # Renderiza la plantilla HTML principal del parqueadero
-    return render_template("parqueadero.html")
 
 # -----------------------------------------
 # RUTA PARA CONSULTAR ESPACIOS

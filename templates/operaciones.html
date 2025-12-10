@@ -6,7 +6,7 @@
   <title>Procesos</title>
   <link rel="stylesheet" href="../static/operaciones.css">
   <script src="../static/js/reloj_operaciones.js"></script>
-  <script src="../static/js/emergente_operaciones.js"></script>
+  <script src="../static/js/emergente-ven.js"></script>
 </head>
 <body>
 
@@ -45,6 +45,7 @@
       -->
 
       <!-- Contadores dinámicos -->
+      <!--
       <div id="contadores">
         <div class="contador">
           <span class="icono">🚗</span>
@@ -55,6 +56,7 @@
           <span class="espacios"></span>
         </div>
       </div>
+      -->
 
       <!-- Tablas -->
       <section id="tabla_activos" style="display:none;">
@@ -82,7 +84,7 @@
       <span id="cerrar" class="cerrar">&times;</span>
 
       <form id="form_operacion">
-        <input type="text" name="vehiculo_placa" placeholder="Ingrese placa" required>
+        <input type="text" name="vehiculo_placa" placeholder="Ingrese placa" maxlength="6" minlength="6" pattern="[A-Za-z]{3}[0-9A-Za-z]{3}">
         <input type="hidden" name="tipo_vehiculo" id="tipo_vehiculo_input">
 
         <button type="button" id="registrar_ingreso">Registrar ingreso</button>

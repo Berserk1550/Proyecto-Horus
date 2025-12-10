@@ -27,7 +27,10 @@ def login():
             session["rol"] = usuario["rol"]
             session["activo"] = usuario["activo"]
             session["parqueadero_nit"] = usuario["parqueadero_nit"]
-            return redirect ("/opciones")
+            if usuario["rol"] == "portero":
+                return redirect ("/operaciones")
+            else:
+                return redirect("/opciones")
         else:
             return render_template("index.html",msg="El usuario no esta activo") #<-- si el usuario no esta activo se devuelve un mesensaje informando
         
